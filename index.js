@@ -55,7 +55,7 @@ Bot.on('message', message => {
             message.channel.send('You can get all the rules and info at #rules-info')
         }else{
             message.channel.send(`No tag found for "${args[1]}"`).then(msg => {
-                msg.content.bold()
+                setTimeout(() => { msg.delete(), 5000})
             })
         }
 
