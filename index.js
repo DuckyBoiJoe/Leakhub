@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const Bot = new Discord.Client()
 const prefix = '!'
 const blacklist = ['nigga', 'nigger', 'nig', 'n i g']
-const logson = true
+var logson = true
 
 Bot.on('ready', () => {
     console.log('Leakhub is ready')
