@@ -1,6 +1,5 @@
 const Discord = require('discord.js')
 const Bot = new Discord.Client()
-const Token = 'NzE0NjU2MzQyMDM5ODU1MTU0.Xsx8lA.TJOD1cX2wWlamUq7ZURfOp5WuPU'
 const prefix = '!'
 const blacklist = ['nigga', 'nigger', 'nig', 'n i g']
 
@@ -83,4 +82,4 @@ Bot.on('message', message => {
 
 })
 
-Bot.login(Token)
+Bot.login(process.env.BOT_TOKEN);
