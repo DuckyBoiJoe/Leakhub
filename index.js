@@ -28,6 +28,8 @@ Bot.on('message', message => {
     if(message.content.startsWith(`${prefix}purge`)) {
         const amount = args[1]
         if(!message.member.permissions.has('MANAGE_MESSAGES')) return message.channel.send(`${message.author} Just tried to purge the channel, can we get a :clap: in the chat?`)
+        if(!amount) return message.channel.send('Please give a valid amount of messages to purge.')
+        message.channel.bulkDelete(amount)
     }
 
     if(message.content.startsWith(`${prefix}kick`)) {
