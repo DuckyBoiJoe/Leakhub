@@ -27,7 +27,7 @@ Bot.on('message', message => {
         const member = message.guild.member(user)
         if(!member) return message.channel.send('That user is not in the server')
         const stufftosend = args.join(' ').slice(22)
-        member.send(`You have been kicked from Leakhub. \nReason: ${stufftosend}`)
+        member.send(`You have been kicked from Leakhub. \nReason: ${stufftosend}`).catch(console.error)
         member.kick(stufftosend)
         message.channel.send(`Successfully kicked ${member.user.username}`)
         const chann = message.guild.channels.cache.find(c => c.name == 'logs' && c.type == 'text')
@@ -53,6 +53,8 @@ Bot.on('message', message => {
         if(!args[1]) return message.channel.send('Please specify a tag.')
         if(args[1].toLowerCase == 'info') {
             message.channel.send('You can get all the rules and info at #rules-info')
+        }else{
+            message.channel.send(`No tag found for "${args[1]}"`)
         }
 
 
