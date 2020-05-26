@@ -106,7 +106,7 @@ Bot.on('message', message => {
 
     if (found) {
         const chan = message.guild.channels.cache.find(c => c.name == 'logs' && c.type == 'text')
-        if(!message.channel == chan) {
+        if(!message.channel.name == chan.name) {
         message.delete()
         if(message.content.startsWith(`${prefix}tag`)) {
             message.channel.send(`${message.author} Just tried to bypass using the ${prefix}tag command, can we get a :clap: in the chat?`)
