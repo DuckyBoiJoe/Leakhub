@@ -25,7 +25,10 @@ Bot.on('message', message => {
             msg.react('👎')
         })
     }
-
+    if(message.content.startsWith(`${prefix}purge`)) {
+        const amount = args[1]
+        if(!message.member.permissions.has('MANAGE_MESSAGES')) return message.channel.send(`${message.author} Just tried to purge the channel, can we get a :clap: in the chat?`)
+    }
 
     if(message.content.startsWith(`${prefix}kick`)) {
         message.delete()
@@ -60,7 +63,7 @@ Bot.on('message', message => {
     if(message.content.startsWith(`${prefix}tag`)) {
         if(!args[1]) return message.channel.send('Please specify a tag.')
         if(args[1].toLowerCase == 'info') {
-            message.reply('You can get all the rules and info at rules-info')
+            message.channel.send('You can get all the rules and info at #rules-info')
         }else{
             message.channel.send(`No tag found for "${args[1]}"`)
         }
