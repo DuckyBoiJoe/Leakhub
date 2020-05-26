@@ -18,6 +18,14 @@ Bot.on('guildMemberAdd', member => {
 Bot.on('message', message => {
     let args = message.content.substring(prefix.length).split(/ +/)
 
+    if(message.content.startsWith(`${prefix}poll`)) {
+        const pollchannel = message.guild.channels.cache.find(c => c.name == 'polls' && c.type == 'text')
+        pollchannel.send(args).then(msg => {
+            msg.react('👍')
+            msg.react('👎')
+        })
+    }
+
 
     if(message.content.startsWith(`${prefix}kick`)) {
         message.delete()
@@ -54,7 +62,7 @@ Bot.on('message', message => {
         if(args[1].toLowerCase == 'info') {
             message.channel.send('You can get all the rules and info at #rules-info')
         }else{
-            message.channel.send(`No tag found for "${args[1]}"`).then(msg => {
+            message.channel.send(`No tag found for "${args[1]}"`).then(msg => 
                 msg.delete('10000')
             })
         }
