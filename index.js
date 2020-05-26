@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 const Bot = new Discord.Client()
 const prefix = '!'
 const blacklist = ['nigga', 'nigger', 'nig', 'n i g']
+const logson = true
 
 Bot.on('ready', () => {
     console.log('Leakhub is ready')
@@ -43,8 +44,10 @@ Bot.on('message', message => {
         member.send(`You have been kicked from Leakhub. \nReason: ${stufftosend}`).catch(console.error)
         member.kick(stufftosend)
         message.channel.send(`Successfully kicked ${member.user.username}`)
+        if(logson) {
         const chann = message.guild.channels.cache.find(c => c.name == 'logs' && c.type == 'text')
         chann.send(`${message.author} just banned ${member.user.username} \nReason: ${stufftosend}`)
+        }
     }
 
     if(message.content.startsWith(`${prefix}ban`)) {
@@ -58,8 +61,10 @@ Bot.on('message', message => {
         member.send(`You have been banned from Leakhub. \nReason: ${stufftosend}`)
         member.ban(stufftosend)
         message.channel.send(`Successfully banned ${member.user.username} :hammer:`)
+        if(logson) {
         const chann = message.guild.channels.cache.find(c => c.name == 'logs' && c.type == 'text')
         chann.send(`${message.author} just banned ${member.user.username} \nReason: ${stufftosend}`)
+        }
     }
 
     if(message.content.startsWith(`${prefix}tag`)) {
@@ -70,8 +75,24 @@ Bot.on('message', message => {
             message.channel.send(`No tag found for "${args[1]}"`)
         }
 
-
     }
+
+    if(message.content.startsWith(`${prefix}togglelogs`)) {
+        if(!message.member.permissions.has('MANAGE_CHANNELS')) return message.channel.send(`${message.author} Just Tried To Toggle Logs for Admins, can we get a :clap: in the chat?`)
+        if(!args[1]) return message.channel.send('Please choose "on" or "off"')
+        const toggle = args[1]
+        if(toggle.toLowerCase == 'on') {
+            logson = true
+            message.channel.send('Successfully toggled logs.')
+        }
+
+        if(toggle.toLowerCase == 'off') {
+            logson = false
+            message.channel.send('Successfully toggled logs.')
+        }
+        
+    }
+
 
 
     let found = false
@@ -90,8 +111,10 @@ Bot.on('message', message => {
         }
         message.author.send(`Please refrain from using banned words. \nMessage: ${message.content} \nDetected Word: ${word}`)
         message.author.send(`The word "${word}" is not allowed in ${message.guild.name}`)
+        if{logson} {
         const chan = message.guild.channels.cache.find(c => c.name == 'logs' && c.type == 'text')
         chan.send(`${message.author} said "${word}" in ${message.channel.name}`)
+        }
     }
 
 
