@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const Bot = new Discord.Client()
 const prefix = '!'
 const blacklist = ['nigga', 'nigger', 'nig', 'n i g']
-var logson = true
+const logson = true
 
 Bot.on('ready', () => {
     console.log('Leakhub is ready')
@@ -81,12 +81,12 @@ Bot.on('message', message => {
         if(!message.member.permissions.has('MANAGE_CHANNELS')) return message.channel.send(`${message.author} Just Tried To Toggle Logs for Admins, can we get a :clap: in the chat?`)
         if(!args[1]) return message.channel.send('Please choose "on" or "off"')
         const toggle = args[1]
-        if(toggle == 'on') {
+        if(toggle.toLowerCase == 'on') {
             logson = true
             message.channel.send('Successfully toggled logs.')
         }
 
-        if(toggle == 'off') {
+        if(toggle.toLowerCase == 'off') {
             logson = false
             message.channel.send('Successfully toggled logs.')
         }
@@ -105,14 +105,17 @@ Bot.on('message', message => {
     }
 
     if (found) {
+        const chan = message.guild.channels.cache.find(c => c.name == 'logs' && c.type == 'text')
+        if(!message.channel == chan) {
         message.delete()
         if(message.content.startsWith(`${prefix}tag`)) {
             message.channel.send(`${message.author} Just tried to bypass using the ${prefix}tag command, can we get a :clap: in the chat?`)
         }
         message.author.send(`Please refrain from using banned words. \nMessage: ${message.content} \nDetected Word: ${word}`)
+        message.author.send(`The word "${word}" is not allowed in ${message.guild.name}`)
         if(logson) {
-        const chan = message.guild.channels.cache.find(c => c.name == 'logs' && c.type == 'text')
         chan.send(`${message.author} said "${word}" in ${message.channel.name}`)
+        }
         }
     }
 
