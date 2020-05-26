@@ -81,12 +81,12 @@ Bot.on('message', message => {
         if(!message.member.permissions.has('MANAGE_CHANNELS')) return message.channel.send(`${message.author} Just Tried To Toggle Logs for Admins, can we get a :clap: in the chat?`)
         if(!args[1]) return message.channel.send('Please choose "on" or "off"')
         const toggle = args[1]
-        if(toggle.toLowerCase == 'on') {
+        if(toggle == 'on') {
             logson = true
             message.channel.send('Successfully toggled logs.')
         }
 
-        if(toggle.toLowerCase == 'off') {
+        if(toggle == 'off') {
             logson = false
             message.channel.send('Successfully toggled logs.')
         }
