@@ -110,7 +110,6 @@ Bot.on('message', message => {
             message.channel.send(`${message.author} Just tried to bypass using the ${prefix}tag command, can we get a :clap: in the chat?`)
         }
         message.author.send(`Please refrain from using banned words. \nMessage: ${message.content} \nDetected Word: ${word}`)
-        message.author.send(`The word "${word}" is not allowed in ${message.guild.name}`)
         if(logson) {
         const chan = message.guild.channels.cache.find(c => c.name == 'logs' && c.type == 'text')
         chan.send(`${message.author} said "${word}" in ${message.channel.name}`)
