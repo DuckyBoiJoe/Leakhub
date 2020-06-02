@@ -21,7 +21,7 @@ Bot.on('message', message => {
 
     if (message.content.startsWith(`${prefix}poll`)) {
         const pollchannel = message.guild.channels.cache.find(c => c.name == 'polls' && c.type == 'text')
-        pollchannel.send(args).then(msg => {
+        pollchannel.send(`@everyone Poll: ${args.splice(1).join(' ')}`).then(msg => {
             msg.react('👍')
             msg.react('👎')
         })
